@@ -5,7 +5,6 @@ sample for windows usermode
 
 ```c
 #include <windows.h>
-#include "IATHook.c"
 
 
 LONG IATHook(
