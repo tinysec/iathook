@@ -35,12 +35,14 @@ void* GetIATHookOrign( __in HANDLE hHook );
 
 typedef struct _IATHOOK_BLOCK
 {
+	void*	pOrigin;
+
 	void*	pImageBase;
 	char*	pszImportDllName;
 	char*	pszRoutineName;
 
 	void*	pFake;
-	void*	pOrigin;
+	
 }IATHOOK_BLOCK;
 
 
