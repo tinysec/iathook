@@ -138,7 +138,7 @@ void*  _IATHook_InterlockedExchangePointer(__in void* pAddress , __in void* pVal
 		
 		__try
 		{
-			MmProbeAndLockPages(pNewMDL, KernelMode, IoWriteAccess);
+			MmProbeAndLockPages(pNewMDL, KernelMode, IoReadAccess);
 			
 			pNewMDL->MdlFlags |= MDL_MAPPING_CAN_FAIL;
 			
@@ -150,7 +150,9 @@ void*  _IATHook_InterlockedExchangePointer(__in void* pAddress , __in void* pVal
 					FALSE ,
 					HighPagePriority 
 			);
-
+			
+			MmProtectMdlSystemAddress(pNewMDL, PAGE_READWRITE);
+			
 			//pWriteableAddr = MmMapLockedPages(pNewMDL, KernelMode);
 		}
 		__except(EXCEPTION_EXECUTE_HANDLER)
